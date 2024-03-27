@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html id="SchoolBusHTML" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> School Bus Route Network Analysis | Kyle Bierly </title>
+        <link rel="icon" type="image/x-icon" href="../Images/earth.png">
+        <meta name="description" content="Bainbridge Island School Bus Route Network Analysis Project">
+        <meta name="keywords" content="GIS Analyst, Kyle Bierly, GIS, Portfolio, Technician, Network Analysis, Analysis, Bus">
+        <meta name="author" content="Kyle Bierly">
+        <link rel="stylesheet" href="../styleKB.css">
+        <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    </head>
+<body>
+        <nav class="navbar">
+            <a id="KyleBierly" href="../KyleBierly.html"><img id="blackglobe" src="../Images/earth.png" alt="globe"><h1>Kyle Bierly</h1></a>
+            <ul>
+                <li><a href="../About.html">About</a></li>
+                <li><a href="../Portfolio.html" class="active">Portfolio</a></li>
+                <li><a href="../Contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    <main id="SchoolBusMain">
+        <div class="article">
+            <h1 class="ArticleTitle">Bainbridge Island School Bus Route Network Analysis</h1>
+        <div class="SchoolBusMapContainer">
+            <iframe src="../WebMaps/BainbridgeSchoolBusNetworkAnalysis/BIMap.html" alt="Web map showing optimized school bus routes on Bainbridge Island" id="SchoolBusMap">
+            </iframe>
+        </div>
+        <div class="ArticleText">
+            <p>Map created in ArcGIS Pro using Location-allocation and Vehicle Routing Problem techniques, transferred and reformatted in QGIS for WebMap Publishing, reprogrammed and stylized for website use with HTML, CSS, and JavaScript. Map package can be found <a href="https://claremont.maps.arcgis.com/home/item.html?id=207eb5b19f7945a988e0c2b1346e6af5">here</a>.
+            </p>
+            <p>
+            Bainbridge Island School District bus routes were optimized for the island based on publicly available housing and roads GIS data from Kitsap County. These specific bus routes were determined for the BHS, EHHS, Odyssey, Woodward Middle School, and Sakai lines. However, Bainbridge Island School District has 3 other bus lines for its elementary schools; a similar process could be followed.
+            </p>
+            <p>
+            Data was first cleaned to remove industrial and commercial buildings from the dataset. Building facilities were substituted for points, and points were added along each road every .25 miles to simulate candidate bus stops. Road points were removed from highways and other unsafe or inaccessible locations to school buses. To set up a location-allocation analysis, 500 building points plus road-end candidate bus stops had to be randomly removed due to the 10,000 demand node cap and 1,000 facility node cap. There were over 500 candidate bus stops. I then ran a location-allocation Maximize Coverage and Minimize Facilities analysis with a .5-mile walking distance cutoff from each candidate bus stop. No demand nodes were left uncovered.
+            </p>
+            <p>
+            Once optimal bus stops were chosen, I then proceeded with a Vehicle Routing Problem analysis. Census data was chosen to determine that approximately 13 percent of the Bainbridge Island population is between 11-18 and approximately one-third of students these ages ride the bus to school. The BHS etc. lines also have a fleet of 12, 90-student capacity buses. I ran the analysis with these constraints in mind with accurate depot locations (start/end points) and a maximum drive time of 45 minutes. All order locations were successfully fulfilled within the constraints and all 12 buses were used.
+            </p>
+            <p class="UnindentedP">
+            Further considerations:
+            </p>
+            <ul class="ArticleList">
+                <li>Data could be cleaned further to address multilevel residencies such as apartments and to ensure commercial buildings are not included as homes.
+                </li>
+                <li>Not having ESRI force me to randomly delete 500 data points and candidate stop road-ends because of data limits would be helpful.
+                </li>
+                <li>
+                Chosen bus stops could be manually slightly shifted to account for safety and optimal pullover locations.
+                </li>
+                <li>
+                Running two separate location-allocation analyses by splitting the area in half and overlapping might be helpful to ensure all data points are used. 
+                </li>
+            </ul>
+        </div>
+    </div>
+    </main>
+</body>
+</html>
