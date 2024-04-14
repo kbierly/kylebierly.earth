@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> UW Cherry Tree Digitization | Kyle Bierly </title>
+        <link rel="icon" type="image/x-icon" href="../../Images/earth.png">
+        <meta name="description" content="Mapping and digitization of historical drafting of the University of Washington's historic cherry trees">
+        <meta name="keywords" content="GIS Analyst, Kyle Bierly, GIS, Portfolio, Technician, R, ggplot, knitr, data analysis, honeybee, bees, population, ANOVA">
+        <meta name="author" content="Kyle Bierly">
+        <link rel="stylesheet" href="../../styleKB.css">
+        <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    </head>
+<body id="CherryTreesBody">
+    <main id="CherryTreesMain">
+        <nav class="navbar">
+            <a id="KyleBierly" href="../../"><img id="blackglobe" src="../../Images/earth.png" alt="globe"><h1>Kyle Bierly</h1></a>
+            <ul>
+                <li><a href="../../About/">About</a></li>
+                <li><a href="../../Portfolio/" class="active">Portfolio</a></li>
+                <li><a href="../../Contact/">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="article" id="CherryTreesArticle">
+            <h1 class="ArticleTitle" id="CherryTreesArticleTitle">Digitization of My Grandfather's Historical Plans for the University of Washington's Cherry Trees</h1>
+            <div class="ArticleText">
+                <p>For many people, visiting the University of Washington's cherry trees in the Quad is a special occasion. Some people make it a tradition to come each year, some people use it as an excellent Instagram backdrop, and some people travel from far parts of the world to see them. The cherry trees invoke a feeling of springtime, tranquility, and renewed beauty for everyone. But for me, visiting the cherry trees is extra special. 
+                </p>
+                <p>My grandfather, Eric Hoyte, was the landscape architect for the University of Washington from 1960 to 1987. While he worked with a team of people who collectively came up with the idea of transporting thirty Yoshino cherry trees from the Washington Park Arboretum to the Quad, "the outset of the unique arrangement of the cherry trees in the Quad can be easily traced down to one man. Eric Hoyte, the landscape architect, designed the arrangement." More information can be found <a href="https://www.readkong.com/page/history-of-the-cherry-trees-in-the-liberal-arts-quadrangle-7123108?p=2">here</a>. I remember when the author, Yuki Shiotani, of the aforementioned article interviewed my grandfather. He was an intelligent and diligent young man who compiled an extensive history of the cherry trees in the Quad.
+                </p>
+            </div>
+            <img src="../../Images/CherryPic.jpeg" class="ArticleImage" alt="Cherry Trees in the Quad">
+            <div class="ArticleText">
+                <p>The above picture is courtesy of the University of Washington.</p>
+                <p>I had the chance to visit the cherry trees twice this year. It is always a lovely time enjoying the Quad with my family and remembering my grandfather. I especially love watching the thousands of people who come to enjoy and observe what my grandfather helped create, and I love watching their faces light up when I inevitably tell a stranger his part in all this. They have a special bench there with a plaque dedicated to my grandfather. I find it particularly endearing; we always take pictures here.</p>
+            </div>
+            <img src="../../Images/EricBench.jpg" class="ArticleImage" alt="Eric Hoyte's Bench">
+            <div class="ArticleText">
+                <p>For this project, I decided I wanted to digitize my grandfather's original plans for the layout of the cherry trees in the Quad and compare this digitization with the current, physical layout of the Quad. While this project was not particularly complex, it was good to revisit the basics of ArcGIS Pro and ArcGIS Online. It was particularly helpful for honing my georeferencing and layer editing skills while working with old maps. I also enjoyed integrating OpenStreetMap information and Google Maps Satellite imagery within the Esri Suite.</p>
+                <p>To start with, I will first attach an image of the base map—the Google Satellite imagery—in order to demonstrate what the Quad physically looks like today. We can also compare this image with different layers. The cherry trees are evidently not in bloom in this image.
+                </p>
+            </div>
+            <img src="../../Images/Satellite.jpg" class="ArticleImage" alt="Satellite Perspective of the Quad">
+            <div class="ArticleText">
+                <p>I found my grandfather's original plans (drafted in 1961) for the cherry trees in Shiotani's original article. His plans can be seen in the following image superimposed and georeferenced on the Quad. I was impressed with how well his sketch lines up with the real, physical layout of the area. My father is an architect, and I've taken architectural drafting classes, so I know this is not easy to accomplish. The satellite image was taken slightly south of the buildings, so that can account for some discrepancies in the alignment. One might already be able to pick up on some differences between his original plans for the Quad and the current layout by looking at this picture.
+                </p>
+            </div>
+            <img src="../../Images/OriginalPlans.jpg" class="ArticleImage" alt="My Grandfather's Plans Superimposed on the Quad">
+            <div class="ArticleText">
+            <p>I began digitizing my grandfather's plans by first creating a "Grass" polygon layer that encompassed the entire quadrilateral. I then proceeded to draw the individual envisioned "Paths" (which my grandfather also designed in brick) on the Quad using a separate layer. I similarly traced features for the "Buildings" on the Quad, then used the Erase tool in ArcGIS to clip the portion of the Grass layer that intersected with the other layers; this process helped convert the grass into individual features. 
+            </p>
+            <p>
+            I then constructed a "Trees" layer and classified the colors of the trees by species. Observe how he initially planned for thirty very symmetrical cherries and four Cherry Plums (a detail which can be found scribbled in his original plans). The other two Cherry Plums are located slightly southwest of this digitization. I lastly added some labels.
+            </p>
+            <p>I also find it interesting how asymmetric the original plans were for the Quad's pathways. My mother always told me that he designed them with how people walk across the Quad in mind (like <a href="https://en.wikipedia.org/wiki/Desire_path">desire paths</a>), rather than purely for aesthetic reasons. 
+            </p>
+            </div>
+            <img src="../../Images/EnvisionedLayout.jpg" class="ArticleImage" alt="Digitized Version of My Grandfather's Envisioned Layout of the Quad">
+            <div class="ArticleText">
+                <p>I then imported OSM data to construct a new map (observable in the following picture) and compare this envisioned layout with the actual, current layout of the Quad, since the OSM mapping is very detailed and is already a rendering of the current satellite imagery for the Quad. However, it is a bit strange how the OSM features are more off than my grandfather's original plans for the courtyard—like with Raitt and Miller Hall. I clipped the OSM layers to overlap with my other maps/my grandfather's plans and had to edit the features only slightly. For example, I converted the tree points layer to polygons with the Buffer tool.
+                </p>
+                <p>I then colored each of these feature classes in the same manner as my digitization of the envisioned plans to better compare the layers. We can see in this map that there is a larger variety of trees, a Redwood, Douglass firs, Magnolias, etc., on the Quad than previously envisioned. We can also see how the layout of the paths is different from envisioned. They are more symmetric, likely for aesthetic and construction reasons, but they maintain my grandfather's vision of ensuring that people can get from point A to point B in the most natural way possible à la desire paths. Lastly, I enjoy how someone took the time in OSM to map out each of the benches; my grandfather's bench is included, and I annotated this designation in my ArcGIS Pro.
+                </p>
+                </div>
+            <img src="../../Images/CurrentLayout.jpg" class="ArticleImage" alt="Digitized Version of the Current, Actual Layout of the Quad">
+            <div class="ArticleText">
+                <p>This bench and more can be found in the web map version of what I created <a href="https://claremont.maps.arcgis.com/apps/mapviewer/index.html?webmap=60b33c07347c46d7940eacfee1f311ef">here</a> in ArcGIS online.  Thank you for reading my article and allowing me to honor my grandfather, who passed away in 2018.
+                </p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

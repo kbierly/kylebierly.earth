@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Honeybee Data Analysis | Kyle Bierly </title>
+        <link rel="icon" type="image/x-icon" href="../../Images/earth.png">
+        <meta name="description" content="Honeybee Population Decline Data Analysis">
+        <meta name="keywords" content="GIS Analyst, Kyle Bierly, GIS, Portfolio, Technician, R, ggplot, knitr, data analysis, honeybee, bees, population, ANOVA">
+        <meta name="author" content="Kyle Bierly">
+        <link rel="stylesheet" href="../../styleKB.css">
+        <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    </head>
+<body id="HoneybeeBody">
+    <main id="HoneybeeMain">
+        <nav class="navbar">
+            <a id="KyleBierly" href="../../"><img id="blackglobe" src="../../Images/earth.png" alt="globe"><h1>Kyle Bierly</h1></a>
+            <ul>
+                <li><a href="../../About/">About</a></li>
+                <li><a href="../../Portfolio/" class="active">Portfolio</a></li>
+                <li><a href="../../Contact/">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="article" id="HoneybeeArticle">
+            <h1 class="ArticleTitle" id="HoneyBeeArticleTitle">Honey Bee Population Decline Data Analysis</h1>
+            <div class="ArticleText">
+                <p>I first started working with honey bee mortality data as a senior in high school in 2018. I was fortunate during this period to have the opportunity to take an advanced stats class in which I began working with R. This class gave me a strong foundation within R, R-Studio, LaTeX, Excel, and PowerBI. I have worked with these programs, especially R, for many years since this class—whether it was for later classes, personal projects, or work. With this experience, I now feel very comfortable and fluent with these programs. 
+                </p>
+                <p>The following project analyzes the causes of winter colony loss for honey bees within the United States and Europe. The bulk of the statistical analysis was performed in R, and it was integrated into LaTeX in PDF form via knitr. The information is communicated effectively with several aesthetic graphics (scatter plots, bar graphs, etc.). As it pertains to GIS, I created an effective choropleth map generated using ggplot2 within R that details the average number of colonies lost per beekeeper in the winter in each European country.
+                </p>
+                <p>I ran an ANOVA test and a Tukey-Kramer post hoc test to determine that there is significant evidence England and Belgium have higher means than all other countries, besides each other. So, in countries such as these, it would be expected that beekeepers, on average, lose more colonies during the winter. For the United States, I ran an ANCOVA test to determine that the covariate of reason for death does not adjust the association between year and percent loss. So, the number of bee mortalities had generally decreased from 2008 to 2017, and the cause of colony loss did not affect that percentage.
+                </p>
+            </div>
+            <object class="pdf" id="pdfObject"
+            data=
+                "Are Honey Bees Still Dying at Alarming Rates.pdf#zoom=58%">
+            </object>
+            <div class="ArticleText">
+                <p>In the following project, I continued researching the global population decline of honey bees. This project was done as a first-year student at Pomona College in my Statistical Linear Models class. I, thus, continued to develop my experience and expertise working with statistical linear models via this class. I also continued working with R, knitr, and a little bit of Python. These projects later inspired me to continue studying honey bee population data from a GIS perspective as a farm intern in the summer of 2019.
+                </p>
+                <p>I specifically research here "the most devastating" cause of the die-off of honey bees—known as the <i>Varroa destructor</i> parasite. This project aimed to determine whether using any form of treatment on the varroa parasite affects the number of honey bee colonies lost and whether the size of a beekeeping operation affects honey bee colony loss. I analyze these issues with a two-way ANOVA test and a Tukey test for additivity; with these tests, I revealed that running a larger, commercially sized beekeeping operation correlates with less colony loss (likely due to the efficacy with which it is run), and I revealed that there is a significant, beneficial effect of using a form of varroa treatment to reduce the proportion of colonies lost.
+                </p>
+            </div>
+            <object class="pdf" id="pdfObject"
+            data=
+                "The Effectiveness of Treating the Varroa Parasite.pdf#zoom=58%">
+            </object>
+        </div>
+    </main>
+</body>
+</html>
