@@ -7,50 +7,6 @@ body{
     margin:0;
     padding-top:11vh;
 }
-nav{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0px;
-  background-color: rgb(239, 235, 227);
-  height: 11vh; 
-  min-height: 50px;
-  position: fixed;
-  top: 0;
-  z-index: 1;
-}
-#blackglobe{
-  width: 40px;
-  margin-right: 13px;
-}
-#KyleBierly{
-  margin-top: -.2vw;
-  margin-left: 9vw;
-  color: black;
-  text-decoration: none;
-  font-size: 20pt;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-}
-nav ul{
-  list-style: none;
-  width: 70%;
-  text-align:right;
-  padding-right: 5vw;
-  white-space: nowrap;
-}
-nav ul li{
-  display: inline-block;
-  margin: 10px 6%;
-}
-nav ul li a{
-  color: black;
-  text-decoration: none;
-  font-family: "Lato", sans-serif;
-  font-size: 13pt;
-}
 nav ul li a:hover,
 nav ul li a:active,
 nav ul li a.active{
@@ -61,18 +17,8 @@ nav ul li a.active{
     position: relative;
     text-align: center;
   }
-#globe{
-  max-height: 67vh;
-  max-width: 75vw;
-  width:auto;
-}
 h1{
     font-family: "EB Garamond", sans-serif; 
-}
-#Title{
-    margin-top: 6px;
-    margin-bottom: -5px;
-    font-size: 19pt;
 }
 a{color: black;}
 p{
@@ -84,17 +30,624 @@ p{
     font-size: 12pt;
     hyphens: auto;
 }
-#TitleDescription{
-  width: 60%;
-  max-width: 655px;
+button:hover{
+  background: rgb(77, 70, 59);
+  color: white;
 }
+button:active{
+  background: rgb(55, 50, 43);
+  border:rgb(55, 50, 43);
+  color: black;
+}
+#hawaii{
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+#AboutMain{
+  flex: 1; /* Allow main to grow and take up remaining space */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center its children vertically */
+  align-items: center;
+}
+#footer {
+  width: 100%;
+  height: 10px;
+  text-align: center;
+  font-size: small;
+  width:100%;
+  margin-bottom: 10px;
+}
+#footer a{
+  font-family: "Lato", sans-serif;
+  font-size: 8pt;
+}
+#AboutText{
+  width: 42vw;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+}
+#GitHub:active{
+  text-shadow: 1px 1px 5px rgb(0,0,0,.2);
+}
+#GitHub:active img{
+  filter: drop-shadow(1px 1px 5px rgb(0,0,0,.2));
+}
+#GitHub a{
+  text-decoration: none;
+  background: linear-gradient(to right, #2f0941,#3e3765, #354665);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+#GitHubLogo{
+  width:30px;
+}
+@keyframes mySlideLeft{
+  from{margin-left: 0%;}
+  to{margin-left: -100%;}
+}
+@keyframes mySlideRight{
+  from{margin-left: 0%;}
+  to{margin-left: 100%;}
+}
+@keyframes myWipe {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+[transition-style="in:wipe:down"] {
+  animation: 2.5s cubic-bezier(.25, 1, .30, 1) wipe-in-down both;
+}
+.flash {
+  position: fixed;
+  background-color: white;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999; /* Ensure the flash appears above all other content */
+  pointer-events: none; /* Ensure it doesn't interfere with mouse events */
+  animation: flashAnimation 0.7s forwards; /* Apply the flash animation */
+}
+
+@keyframes flashAnimation {
+  0% { opacity: 1; } /* Start with opacity 0 */
+  100% { opacity: 0; } /* End with opacity 1 */
+}
+
+#error{margin-left: auto;
+margin-right: auto;
+margin-top: 30vh;
+font-size: 40pt;}
+#errorbody{
+  justify-content: center;
+  text-align: center;
+}
+@media (max-width: 600px) {
+  /* Adjust styles for mobile devices */
+  .image-cropper {
+    min-height: 150px;
+    min-width: 150px;
+    width: 12vw;
+    height:12vw;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0vh;
+  }
+  #AboutText{
+    width: 250px;
+    margin-top: 20px;
+    background-color: rgba(239, 235, 227, 0.8);
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 15px;
+    
+  }
+  #AboutBody{
+    display: flex;
+    flex-direction: column;
+    min-height: 150vh; /* Ensure the body takes up the full viewport height */
+  }
+  #blackglobe{
+    width: 30px;
+    margin-right: 8px;
+  }
+  #KyleBierly{
+    margin-top: -.2vw;
+    margin-left: 5vw;
+    color: black;
+    text-decoration: none;
+    font-size: 20pt;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+  nav{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px;
+    background-color: rgb(239, 235, 227);
+    height: 11vh; 
+    min-height: 50px;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
+  nav ul{
+    list-style: none;
+    width: 60%;
+    text-align:right;
+    padding-right: 8vw;
+  }
+  nav ul li{
+    margin: 9px 20%;
+    text-align: left;
+  }
+  nav ul li a{
+    color: black;
+    text-decoration: none;
+    font-family: "Lato", sans-serif;
+    font-size: 11pt;
+  }
+  /* Adjust other styles as needed */
+  .portfolio-box{
+    margin-top: 6vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: none;
+    width: 100vw;
+    max-width: 1000px;
+    padding-top: 20px;
+  }
+  .portfolio-row{
+    display: flex;
+    justify-content:space-evenly;
+  }
+  .portfolio-row a{
+    text-decoration: none;
+  }
+  .portfolio-group p{
+    text-indent: 0;
+    font-size: 11pt;
+    font-weight: 530;
+    text-align: center;
+  }
+  .portfolio-group{
+    text-align: center;
+    width: 120px;
+    padding-top: 30px;
+    padding-bottom: 5px;
+  }
+  .portfolio-group:hover{
+    background-color: rgb(239, 235, 227, .5);
+  }
+  .portfolio-group:active{
+    background-color: rgba(239, 235, 227, 0.8);
+  }
+  .portfolio-group:active img{
+    opacity: .7;
+  }
+  .portfolio-group:active p{
+    opacity: .7;
+  }
+  #blank {
+    visibility: hidden;
+  }
+  .portfolio-group img{
+    height: 130px;
+  }
+  #GitHub{
+    left: 50%; /* Position the left edge at the horizontal center */
+    transform: translateX(-50%);
+    padding-left: 3px;
+    margin-top: 100px;
+    position: fixed;
+    display: block;
+    font-family: "Lato", sans-serif;
+    font-size: 30px;
+    text-align: center;
+  }
+  
+#ContactText{
+  text-indent: 50px;
+  width: 80vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1%;
+  margin-bottom: 0;
+  text-align: justify;
+  font-size: 14pt;
+  font-weight: 500;
+  padding-left: 3px;
+  padding-top: 10px;
+}
+form{
+  font-size: 12pt;
+  font-family: "Lato", sans-serif;
+}
+.contact-box{
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: none;
+  width: 92vw;
+  padding-top: 20px;
+}
+.input-row{
+  display: flex;
+  justify-content:space-between;
+  margin-bottom: 20px;
+  padding-left: 15px;
+}
+#LastNameGroup, #SubjectGroup{
+  width: 30px; /* Set width for input fields, accounting for margin */
+  margin-right: 38px;
+}
+label{
+  white-space: nowrap;
+  margin-left: -2px;
+}
+.input-row .input-group{
+  flex-basis: 30%;
+}
+input{
+  width:100px;
+  border:none;
+  background: none;
+  border-bottom: 3px solid rgb(77, 70, 59);
+  outline: none;
+  font-family: "Lato", sans-serif;
+  font-size: 10pt;
+}
+textarea{
+  width: 81vw;
+  margin-left: 15px;
+  border:3px solid rgb(77, 70, 59);
+  outline: none;
+  padding-bottom: 3px;
+  background: none;
+  font-family: "Lato", sans-serif;
+  font-size: 11pt;
+}
+#Message{
+  padding-left: 15px;
+  margin-top: 2px;
+  margin-bottom: 10px;
+  display: block;
+}
+#ContactBody{
+  display: flex;
+  flex-direction: column;
+  min-height: 88vh; /* Ensure the body takes up the full viewport height */
+}
+#ContactMain{
+  flex: 1; /* Allow main to grow and take up remaining space */
+  display: flex;
+  justify-content: center; /* Center its children horizontally */
+  align-items: center; 
+  margin-bottom: 0px;
+}
+#ContactTown{
+  background-color: rgba(239, 235, 227, 0.8);
+  padding-left: -20px;
+  width: 92vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 5px;
+  box-sizing: border-box;
+}
+.button-container {
+  text-align: center; /* Center buttons horizontally */
+}
+button{
+  background: none;
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  margin-top: 15px;
+  width: 130px;
+  height: 35px;
+  border:3px solid rgb(77, 70, 59);
+  outline: none;
+  margin-bottom: 15px;
+}
+.SchoolBusMapContainer {
+  height: 83vh; /* Adjust this value as needed */
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  position: relative; /* Necessary for absolutely positioning the map */
+}
+#FirstP{
+  margin-top: -50px;
+}
+#SchoolBusMap {
+  width: 100%;
+  max-width: 545px;
+  height: 90%;
+  position: relative;
+  top: -8px; /* Adjust as needed */
+}
+.article{
+  background-color: rgba(239, 235, 227, 0.8);
+  padding-top: 5px;
+  padding-bottom: 20px;
+  width: 90%;
+  max-width: 1000px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  justify-content: center;
+}
+#CherryTreesArticle{
+  background-image: url("/Images/CherryBranch.png");
+  background-position-x: -60px;
+  background-position-y: -30px;
+  background-repeat: repeat-y
+}
+.ArticleImage{
+  width: 75%;
+  max-width: 550px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.ArticleTitle{
+text-align: center;
+font-size: 25px;
+font-weight: 600;
+margin-bottom: 29px;
+}
+.ArticleText{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.UnindentedP{
+  text-indent: 0px;
+}
+.ArticleList{
+  text-align: justify;
+  font-family: "Lato", sans-serif;
+  font-size: 12pt;
+  hyphens: auto;
+}
+#SchoolBusMain{
+  padding-bottom: 30px;
+}
+#SchoolBusBody{
+  height: 225vh;
+  padding-bottom: 500px;
+}
+#CherryTreesBody{
+  padding-bottom: 50px;
+}
+.pdf {
+  width: 90%;
+  height: 45vh;
+  margin-left: 5%;
+  aspect-ratio: 4 / 3;
+  margin-top: 5px;
+}
+#HoneybeeMain{
+  padding-bottom: 50px;
+}
+#HoneybeeArticle{
+  padding-bottom: 42px;
+}
+#HoneyBeeArticleTitle{
+  margin-bottom: 25px;
+}
+#HoneybeeBody{
+  height: 280vh;
+}
+#ChristmasIslandLeft {
+  width: 100vw; /* Ensure image spans entire viewport width */
+  height: 100vh;
+  object-fit: cover; /* Maintain aspect ratio and cover container */
+  margin-top: -11vh;
+  z-index: 2;
+  position: fixed;
+  pointer-events: none;
+  animation: mySlideLeft;
+  animation-delay:3.4s;
+  animation-timing-function: ease-in;
+  animation-duration:4s;
+  animation-fill-mode: forwards;
+}
+#ChristmasIslandRight {
+  width: 100vw; /* Ensure image spans entire viewport width */
+  height: 100vh;
+  object-fit: cover; /* Maintain aspect ratio and cover container */
+  z-index: 2;
+  margin-top: -11vh;
+  position: fixed;
+  pointer-events: none;
+  animation: mySlideRight;
+  animation-delay:3.4s;
+  animation-timing-function: ease-in;
+  animation-duration:4s;
+  animation-fill-mode: forwards;
+}
+#ChristmasIslandLine {
+  width: 100vw; /* Ensure image spans entire viewport width */
+  height: 100vh;
+  object-fit: cover; /* Maintain aspect ratio and cover container */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  z-index: 2;
+  margin-top: -11vh;
+  position: fixed;
+  pointer-events: none;
+  opacity: .7;
+  animation: 3s ease-in-out 0s both myWipe, 4s ease-in 3.4s forwards mySlideLeft;
+}
+#globe{
+  max-height: 67vh;
+  max-width: 90vw;
+  width:auto;
+}
+#TitleDescription{
+  width: 90%;
+  max-width: 655px;
+  font-size: 14pt;
+}
+#Title{
+  margin-top: 6px;
+  margin-bottom: -5px;
+  font-size: 23pt;
+}
+}
+
+
+@media (min-width: 600px) {
+  /* Adjust styles for mobile devices */
+  .image-cropper {
+    min-height: 150px;
+    min-width: 150px;
+    width: 12vw;
+    height:12vw;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+  }
+  #AboutText{
+    min-width: 450px;
+  }
+  #AboutBody{
+    display: flex;
+    flex-direction: column;
+    min-height: 88vh; /* Ensure the body takes up the full viewport height */
+  }
+  #blackglobe{
+    width: 40px;
+    margin-right: 13px;
+  }
+  #KyleBierly{
+    margin-top: -.2vw;
+    margin-left: 9vw;
+    color: black;
+    text-decoration: none;
+    font-size: 20pt;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+  nav{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px;
+    background-color: rgb(239, 235, 227);
+    height: 11vh; 
+    min-height: 50px;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
+  nav ul{
+    list-style: none;
+    width: 70%;
+    text-align:right;
+    padding-right: 5vw;
+    white-space: nowrap;
+  }
+  nav ul li{
+    display: inline-block;
+    margin: 10px 6%;
+  }
+  nav ul li a{
+    color: black;
+    text-decoration: none;
+    font-family: "Lato", sans-serif;
+    font-size: 13pt;
+  }
+  /* Adjust other styles as needed */
+  .portfolio-box{
+    margin-top: 4vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: none;
+    width: 70vw;
+    min-width: 600px;
+    max-width: 1000px;
+    padding-top: 20px;
+  }
+  .portfolio-row{
+    display: flex;
+    justify-content:space-evenly;
+  }
+  .portfolio-row a{
+    text-decoration: none;
+  }
+  .portfolio-group p{
+    text-indent: 0;
+    font-size: 11pt;
+    font-weight: 530;
+    text-align: center;
+  }
+  .portfolio-group{
+    text-align: center;
+    width: 220px;
+    padding-top: 30px;
+    padding-bottom: 5px;
+  }
+  .portfolio-group:hover{
+    background-color: rgb(239, 235, 227, .5);
+  }
+  .portfolio-group:active{
+    background-color: rgba(239, 235, 227, 0.8);
+  }
+  .portfolio-group:active img{
+    opacity: .7;
+  }
+  .portfolio-group:active p{
+    opacity: .7;
+  }
+  #blank {
+    visibility: hidden;
+  }
+  .portfolio-group img{
+    height: 175px;
+  }
+  #GitHub{
+    left: 50%; /* Position the left edge at the horizontal center */
+    transform: translateX(-50%);
+    position: relative;
+    margin-top: 100px;
+    padding-left: 3px;
+    font-family: "Lato", sans-serif;
+    font-size: 30px;
+    text-align: center;
+  }
+  
 #ContactText{
   text-indent: 50px;
   width: 40vw;
   min-width: 400px;
+  max-width: 650px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 11.5%;
+  margin-top: 1%;
   margin-bottom: 0;
   text-align: justify;
   font-size: 16pt;
@@ -160,12 +713,25 @@ textarea{
   margin-bottom: 10px;
   display: block;
 }
+#ContactBody{
+  display: flex;
+  flex-direction: column;
+  min-height: 88vh; /* Ensure the body takes up the full viewport height */
+}
+#ContactMain{
+  flex: 1; /* Allow main to grow and take up remaining space */
+  display: flex;
+  justify-content: center; /* Center its children horizontally */
+  align-items: center; 
+}
 #ContactTown{
   background-color: rgba(239, 235, 227, 0.8);
   padding-left: -20px;
   width: 42vw;
   min-width: 470px;
-  margin: auto;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
   padding-right: 5px;
   box-sizing: border-box;
 }
@@ -183,134 +749,97 @@ button{
   outline: none;
   margin-bottom: 15px;
 }
-button:hover{
-  background: rgb(77, 70, 59);
-  color: white;
-}
-button:active{
-  background: rgb(55, 50, 43);
-  border:rgb(55, 50, 43);
-  color: black;
-}
-.image-cropper {
-  width: 215px;
-  height: 215px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 50%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 19px;
-  margin-bottom: -17px;
-}
-#hawaii{
-  display: inline;
-  margin: 0 auto;
-  height: 100%;
-  width: auto;
-}
-html, #AboutBody{
-}
-#AboutBody{
-  display: table;
-    width: 100%;
-    margin: 0;
-}
-#AboutMain, footer{
-  display: table-row;
-}
-#AboutMain{
-  height: 90%;
-  margin-bottom: 0%;
-}
-footer {
-  position:sticky;
-  width: 100%;
-  height: 30px;
-  text-align: center;
-}
-footer a{
-  font-family: "Lato", sans-serif;
-  font-size: 8pt;
-}
-#AboutText{
-  width: 42vw;
-  min-width: 450px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 3.5vh;
-  margin-bottom: -14px;
-}
-.portfolio-box{
-  margin-top: 4vh;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: none;
-  width: 70vw;
-  min-width: 600px;
-  max-width: 1000px;
-  padding-top: 20px;
-}
-.portfolio-row{
+.SchoolBusMapContainer {
   display: flex;
-  justify-content:space-evenly;
+  justify-content: center;
+  align-items: center;
+  height: 86vh; /* Adjust this value as needed */
+  width: 75%;
+  min-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  position: relative; /* Necessary for absolutely positioning the map */
 }
-.portfolio-row a{
-  text-decoration: none;
+
+#SchoolBusMap {
+  width: 74%;
+  max-width: 545px;
+  min-width: 545px;
+  height: 100%;
+  max-height: 640px;
+  position: relative;
+  top: -6.5px; /* Adjust as needed */
 }
-.portfolio-group p{
-  text-indent: 0;
-  font-size: 11pt;
-  font-weight: 530;
-  text-align: center;
-}
-.portfolio-group{
-  text-align: center;
-  width: 220px;
-  padding-top: 30px;
-  padding-bottom: 5px;
-}
-.portfolio-group:hover{
-  background-color: rgb(239, 235, 227, .5);
-}
-.portfolio-group:active{
+.article{
   background-color: rgba(239, 235, 227, 0.8);
+  padding-top: 5px;
+  padding-bottom: 30px;
+  width: 65%;
+  min-width: 620px;
+  max-width: 1000px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  justify-content: center;
 }
-.portfolio-group:active img{
-  opacity: .7;
+#CherryTreesArticle{
+  background-image: url("/Images/CherryBranch.png");
+  background-position-x: -50px;
+  background-repeat: repeat-y;
 }
-.portfolio-group:active p{
-  opacity: .7;
-}
-#blank {
-  visibility: hidden;
-}
-.portfolio-group img{
-  height: 175px;
-}
-#GitHub{
-  padding-left: 3px;
-  margin-top: 27vh;
-  margin-bottom: 10px;
+.ArticleImage{
+  width: 60%;
+  min-width: 580px;
+  max-width: 900px;
   display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.ArticleTitle{
+text-align: center;
+font-size: 40px;
+font-weight: 600;
+margin-bottom: 3%;
+}
+.ArticleText{
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.UnindentedP{
+  text-indent: 0px;
+}
+.ArticleList{
+  text-align: justify;
   font-family: "Lato", sans-serif;
-  font-size: 30px;
-  text-align: center;
+  font-size: 12pt;
+  hyphens: auto;
 }
-#GitHub:active{
-  text-shadow: 1px 1px 5px rgb(0,0,0,.2);
+#CherryTreesMain{
+  padding-bottom: 50px;
 }
-#GitHub:active img{
-  filter: drop-shadow(1px 1px 5px rgb(0,0,0,.2));
+#SchoolBusMain{
+  padding-bottom: 50px;
 }
-#GitHub a{
-  text-decoration: none;
-  background: linear-gradient(to right, #2f0941,#3e3765, #354665);
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
+.pdf {
+  width: 80%;
+  height: 115vh;
+  margin-left: 10%;
+  aspect-ratio: 4 / 3;
+  margin-top: 5px;
 }
-#GitHubLogo{
-  width:30px;
+#HoneybeeMain{
+  padding-bottom: 50px;
+}
+#HoneybeeArticle{
+  padding-bottom: 42px;
+}
+#HoneyBeeArticleTitle{
+  margin-bottom: 25px;
 }
 #ChristmasIslandLeft {
   width: 100vw; /* Ensure image spans entire viewport width */
@@ -352,119 +881,26 @@ footer a{
   opacity: .7;
   animation: 3s ease-in-out 0s both myWipe, 4s ease-in 3.4s forwards mySlideLeft;
 }
-@keyframes mySlideLeft{
-  from{margin-left: 0%;}
-  to{margin-left: -100%;}
+#globe{
+  max-height: 67vh;
+  max-width: 75vw;
+  width:auto;
 }
-@keyframes mySlideRight{
-  from{margin-left: 0%;}
-  to{margin-left: 100%;}
-}
-@keyframes myWipe {
-  from {
-    clip-path: inset(0 0 100% 0);
+  #TitleDescription{
+    width: 60%;
+    max-width: 655px;
   }
-  to {
-    clip-path: inset(0 0 0 0);
+  #Title{
+    margin-top: 6px;
+    margin-bottom: -5px;
+    font-size: 19pt;
+}
+}
+@media (min-width: 1600px) {
+  #FirstP{
+    margin-top: -55px;
   }
-}
-
-[transition-style="in:wipe:down"] {
-  animation: 2.5s cubic-bezier(.25, 1, .30, 1) wipe-in-down both;
-}
-.flash {
-  position: fixed;
-  background-color: white;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 99999; /* Ensure the flash appears above all other content */
-  pointer-events: none; /* Ensure it doesn't interfere with mouse events */
-  animation: flashAnimation 0.7s forwards; /* Apply the flash animation */
-}
-
-@keyframes flashAnimation {
-  0% { opacity: 1; } /* Start with opacity 0 */
-  100% { opacity: 0; } /* End with opacity 1 */
-}
-
-.SchoolBusMapContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 86vh; /* Adjust this value as needed */
-  width: 75%;
-  min-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  overflow: hidden;
-  position: relative; /* Necessary for absolutely positioning the map */
-}
-
-#SchoolBusMap {
-  width: 74%;
-  min-width: 545px;
-  height: 100%;
-  position: relative;
-  top: -6.5px; /* Adjust as needed */
-}
-.article{
-  background-color: rgba(239, 235, 227, 0.8);
-  padding-top: 5px;
-  padding-bottom: 30px;
-  width: 65%;
-  min-width: 620px;
-  margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  justify-content: center;
-}
-.ArticleTitle{
-text-align: center;
-font-size: 40px;
-font-weight: 600;
-margin-bottom: 29px;
-}
-.ArticleText{
-  width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-}
-.UnindentedP{
-  text-indent: 0px;
-}
-.ArticleList{
-  text-align: justify;
-  font-family: "Lato", sans-serif;
-  font-size: 12pt;
-  hyphens: auto;
-}
-#SchoolBusMain{
-  padding-bottom: 50px;
-}
-.pdf {
-  width: 80%;
-  height: 115vh;
-  margin-left: 10%;
-  aspect-ratio: 4 / 3;
-  margin-top: 5px;
-}
-#HoneybeeMain{
-  padding-bottom: 50px;
-}
-#HoneybeeArticle{
-  padding-bottom: 42px;
-}
-#HoneyBeeArticleTitle{
-  margin-bottom: 25px;
-}
-#error{margin-left: auto;
-margin-right: auto;
-margin-top: 30vh;
-font-size: 40pt;}
-#errorbody{
-  justify-content: center;
-  text-align: center;
+  .SchoolBusMapContainer{
+    margin-top: -75px;
+  }
 }
