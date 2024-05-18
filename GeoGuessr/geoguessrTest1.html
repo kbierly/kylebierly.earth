@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+    <style>
+        html, body, #map { height: 100%; width: 100%; padding: 0; margin: 0; }
+        .leaflet-google-layer, .gm-style{
+            z-index: initial !important;
+        }
+        .gm-svpc {
+    position: fixed;
+    z-index: 900 !important; /* Set to a very high value */
+}
+.leaflet-control-scale-line{
+    background: none !important;
+    border-color: #444 !important;
+    color: #222 !important;
+    text-shadow: none !important;
+    font-size: 7pt;
+    padding-top: 0px !important;
+}
+#legend {
+  position: absolute;
+  top: 100px;
+  right: 11px;
+  background-color: rgba(255,255,255,.8);
+  font-family: sans-serif;
+  font-size: 11pt;
+  padding-top: 5.5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  z-index: 850; /* Ensure the legend appears above the map */
+}
+
+.legend-item {
+  margin-bottom: 5px;
+}
+
+.legend-color {
+  display: inline-block;
+  width: 20px;
+  height: 10px;
+  margin-right: 5px;
+}
+
+.legend-label {
+  vertical-align: middle;
+}
+.leaflet-popup-content-wrapper{
+    width: 190px;
+    text-align: justify;
+}
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+.leaflet-control-layers-overlays label {
+    white-space: nowrap;
+}
+.shift-left {
+    left: 96px !important; /* Adjust the left position as needed */
+}
+.leaflet-popup-content {
+  white-space: nowrap; /* Prevent line breaks */
+}
+.custom-popup .leaflet-popup-content {
+    white-space: normal;
+    text-align: justify;
+}
+.read-more,
+    .collapse {
+        display: inline-block;
+    }
+.hidden-content, .hidden-content-h3, .collapse {
+    display: none;
+}
+.hidden-content-h3{
+    width: 260px;
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <script src="https://raruto.github.io/cdn/leaflet-google/0.0.3/leaflet-google.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq5qcljI_FErq4L6lbMH1LklS-pVWBglw"></script>
+    <script src="PlonksTest.js"></script>
+    <script src="H3Test.js"></script>
+    <script src="NZTest.js"></script>
+    <script src="WorldBoundariesNoNZData.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+</head>
+<body id="bodyYo">
+    <div id="map"></div>
+    <div id="legend">
+        <div class="legend-item">
+          <span class="legend-color" style="background-color: rgba(255, 215, 0, 0.5);"></span>
+          <span class="legend-label">In GeoGuessr</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-color" style="background-color: rgba(81, 81, 81, 0.5);"></span>
+            <span class="legend-label">Not in GeoGuessr</span>
+        </div>
+        <!-- Add more legend items as needed -->
+    </div>
+</body>
+<script>
+    var map = new L.Map('map', {
+        center: [-40.9006, 174.8860],
+        zoom: 5,
+        markerZoomAnimation: false,
+        zoomControl: false,
+        doubleClickZoom: false,
+    });
+
+    var zoomControl = new L.Control.Zoom({ position: 'topright' });
+
+    var CustomScaleControl = L.Control.Scale.extend({
+    options: {
+        maxWidth: 200, // Maximum width of the scale control
+        imperial: false, // Use metric units
+        position: 'bottomleft',
+    },
+
+    onAdd: function(map) {
+        var container = L.Control.Scale.prototype.onAdd.call(this, map);
+
+        // Customize the appearance of the scale bar
+        container.style.backgroundColor = 'rgba(255,255,255,.5)';
+        container.style.padding = '3px';
+        container.style.left = '70px';
+        return container;
+    }
+});
+
+new CustomScaleControl().addTo(map);
+
+    var ggl = new L.Google('ROADMAP'); // Possible types: SATELLITE, ROADMAP, HYBRID, TERRAIN
+
+    var url = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+        attr =
+        'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+        otm = new L.TileLayer(url, {
+            attribution: attr,
+            /*subdomains:"1234"*/
+        });
+
+    var baseMaps = {
+        "Google Map": ggl,
+    };
+
+function style_WorldBoundaries_1_0(feature) {
+            switch(String(feature.properties['GeoGuessr'])) {
+                case '0':
+                    return {
+                color: 'black',
+                weight: .5,
+                fillOpacity: .5,
+                fillColor: 'rgb(81,81,81)',
+            }
+                    break;
+                case '1':
+                    return {
+                color: 'black',
+                weight: .5,
+                fillOpacity: .5,
+                fillColor: 'gold',
+            }
+                    break;
+            }
+        }
+
+function GeoGuessrFunction(value) {
+    // Format the GeoGuessr value here
+        if (value === '1') {
+            return 'Yes';
+        } else if (value === '0') {
+            return 'No';
+        } else {
+            return 'Unknown value';
+        }
+}
+
+var WorldBoundariesNoNZ = L.geoJSON(WorldBoundariesNoNZData, {
+    style: style_WorldBoundaries_1_0,
+    onEachFeature: function(feature, layer) {
+        // Bind popup with inline style to override the default width
+        layer.bindPopup("<div class='plonksName' style='width: 155px; white-space: normal'><b>Name: </b>" + feature.properties.name + "<br><b>GeoGuessr: </b>" + GeoGuessrFunction(feature.properties.GeoGuessr) + "</div>", {
+    className: 'custom-popup-wrapper' // Custom class name for the content wrapper
+});
+    }
+}).addTo(map);
+
+
+
+// Layers
+var PlonksTest = L.geoJSON(PlonksTestData, {
+    onEachFeature: function(feature, layer) {
+        // Bind popup with inline style to override the default width
+        layer.bindPopup("<div class='plonksName' style='width: 155px; white-space: normal'><b>Name: </b>" + feature.properties.Name + "<br> <b>Info: </b>" + feature.properties.Info + "</div>" + "<br><a href='#' onclick='openStreetView(" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + ")'>Go to Street View</a>", {
+            className: 'custom-popup-wrapper' // Custom class name for the content wrapper
+        });
+    }
+});
+
+
+
+
+
+
+
+/*function onMapMouseMove(e) {
+    console.log(e.latlng);
+}
+map.on('mousemove', onMapMouseMove);*/
+
+    var H3Test = L.geoJSON(H3TestData,
+    {style: {
+        fillOpacity: 0,
+        color: 'black',
+  }});
+
+  var intersectingFeaturesObject = {};
+
+// Iterate over each feature in File A
+NZTestData.features.forEach(function(featureA) {
+    // Initialize an array to store intersecting features from File B
+    var intersectingFeatures = [];
+
+    // Iterate over each feature in File B
+    H3TestData.features.forEach(function(featureB) {
+        // Check if featureA intersects with featureB
+        if (turf.booleanIntersects(featureA, featureB)) {
+            // If they intersect, add featureB to the array
+            intersectingFeatures.push(featureB);
+        }
+    });
+
+    // Add the array of intersecting features to the object
+    intersectingFeaturesObject[featureA.properties.fid] = intersectingFeatures;
+});
+
+var NZTest = L.geoJSON(NZTestData, {
+    onEachFeature: function(feature, layer) {
+        // Define the layers control HTML
+        var layersControlHTML = `
+                <section class="leaflet-control-layers-list">
+                    <div class="leaflet-control-layers-overlays">
+                        <br>
+                        <label>
+                            <span>
+                                <input type="checkbox" class="leaflet-control-layers-selector h3-checkbox">
+                                <span>${feature.properties.name} H3</span>
+                            </span>
+                        </label>
+                        <br>
+                        <label>
+                            <span>
+                                <input type="checkbox" class="leaflet-control-layers-selector plonks-checkbox">
+                                <span>${feature.properties.name} Plonks</span>
+                            </span>
+                        </label>
+                    </div>
+                </section>
+        `;
+
+        // Bind popup with layers control HTML
+        layer.bindPopup("<b>Name: </b>" + feature.properties.name + "<br><div><img id='nzInfo' src='../Images/nzinfo.png'></div>");
+        var widthAdjusted = false;
+        layer.on('popupopen', function(event) {
+            // Access the popup content element
+            var popupContent = event.popup._contentNode;
+            var infoImage = document.getElementById('nzInfo');
+            if (!widthAdjusted) {
+            setTimeout(function() {
+        var popupContentWrapper = document.querySelector('.leaflet-popup-content-wrapper');
+        popupTest = popupContentWrapper.classList.add("refreshYo")
+        if (popupContentWrapper) {
+            popupContentWrapper.style.width = infoImage.width + 70 + 'px'; // Set the new width in pixels
+            widthAdjusted = true;
+        }
+    }, 100);} // Adjust the delay as needed
+
+            // Add the layers control HTML to the popup content
+            popupContent.innerHTML += layersControlHTML + "<br> <a href='#' class='read-more'> Read More </a>" + "<div class='hidden-content'> <b> Hemisphere: </b> Southern."+ "<br><b>Official languages: </b> English, Maori." + "<br><b>TLD: </b> .nz" + "<br> <b>Driving side: </b> Left." + "<br> <b>Bollards: </b> White with red wraparound strip." + "<br>  <b>License plates: </b> White with black text." + "<br>  <b>Give-way signs: </b> White border and red text." + "<br>  <b>Traffic signs: </b> Often have white posts." + "<br>  <b>Street signs: </b> Often blue with white text. Cities may have their own, unique street signs." + "<br>  <b>Directional signs: </b> Chevrons. Often green, highway numbers are shown in a red crest." + "<br>  <b>Description: </b> New Zealand's landscape showcases a diverse mix of rolling hills, lush forests, and rugged <br> mountains, creating stunning natural panoramas. Its cities, including Auckland, Wellington, and Christchurch, <br> show a blend of modern architecture against picturesque backdrops, with urban areas complemented by scenic <br> harbors and green spaces. Street views capture the essence of New Zealand's towns, city streets, and coastal <br> roads, providing a glimpse into its culture and varied landscapes. Ferns are often seen on the side of the road in <br> forests. Sheep are also seen frequently." + "<br> <br> <b>Plonk It: </b> <a href='https://www.plonkit.net/new-zealand' target='_blank'>https://www.plonkit.net/new-zealand</a> </div>" + "<a href='#' class='collapse'> <br> Collapse Content </a>";
+            // Add event listener for read more content:
+            document.querySelector('.read-more').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector('.hidden-content').style.display = 'block';
+                document.querySelector('.collapse').style.display = 'block';
+                    document.querySelector('.collapse').addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                        document.querySelector('.hidden-content').style.display = 'none';
+                        document.querySelector('.collapse').style.display = 'none';
+                        document.querySelector('.read-more').style.display = 'block';
+                    });
+                document.querySelector('.read-more').style.display = 'none';
+                });
+            // Add event listeners to the checkboxes
+            var h3Checkbox = popupContent.querySelector('.h3-checkbox');
+            var plonksCheckbox = popupContent.querySelector('.plonks-checkbox');
+            var intersecting = generateIntersectingLayer(layer.feature, {
+    style: {
+        fillOpacity: 0,
+        color: 'black'
+    }
+});
+
+            if (h3Checkbox) {
+                h3Checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // Add NZ H3 layer to the map
+                        intersecting.addTo(map);
+                        intersecting.on('popupopen', function(event) {
+                            var popupContent = event.popup._contentNode;
+                        // Add the layers control HTML to the popup content
+                            popupContent.innerHTML += layersControlHTML;
+                            var h3Checkbox1 = popupContent.querySelector('.h3-checkbox');
+                            var plonksCheckbox1 = popupContent.querySelector('.plonks-checkbox');
+                            if (map.hasLayer(intersecting)) {
+                                h3Checkbox1.checked = true;
+                                console.log('Yes');
+                            }
+                            if (h3Checkbox1) {
+                                h3Checkbox1.addEventListener('change', function(){
+                                if (this.checked) {}
+                                else {
+                                map.removeLayer(intersecting)}})
+                            }
+                            if (map.hasLayer(PlonksTest)) {
+                                plonksCheckbox1.checked = true;
+                                console.log('Yes');
+                            }
+                            if (map.hasLayer(PlonksTest) === false) {
+                                plonksCheckbox1.checked = false;
+                            }
+                            if (plonksCheckbox1) {
+                                plonksCheckbox1.addEventListener('change', function(){
+                                if (this.checked) {
+                                    if (map.hasLayer(PlonksTest) === false) {
+                                        PlonksTest.addTo(map);
+                            }
+                                }
+                                else {
+                                map.removeLayer(PlonksTest)}})
+                            }
+                        })
+                        } else {
+                        // Remove NZ H3 layer from the map
+                        map.removeLayer(intersecting);
+                    }
+                });
+            }
+
+            if (plonksCheckbox) {
+                plonksCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // Add NZ Plonks layer to the map
+                        PlonksTest.addTo(map);
+                    } else {
+                        // Remove NZ Plonks layer from the map
+                        map.removeLayer(PlonksTest);
+                    }
+                });
+            }
+            if (map.hasLayer(PlonksTest)) {
+                                plonksCheckbox.checked = true;
+                            }
+        });
+    },
+    style: {
+        fillColor: 'gold',
+        fillOpacity: .5,
+        color: 'black',
+        weight: .5,
+    }
+}).addTo(map);
+
+var popupActionDone = false; // Flag to track if the popup action has been done
+
+document.querySelector(".leaflet-popup-pane").addEventListener("load", function (event) {
+    var tagName = event.target.tagName,
+        popup = map._popup; // Currently open popup, if any.
+
+    if (tagName === "IMG" && popup && !popupActionDone) {
+        setTimeout(function() {
+            map.closePopup();
+            setTimeout(function() {
+                // Reopen the popup
+                popup.openOn(map);
+                popupActionDone = true; // Set the flag to true to indicate action has been done
+            }, 25); // Adjust the delay before reopening the popup as needed
+        }, 200); // Adjust the delay before closing the popup as needed
+    }
+}, true);
+
+function generateIntersectingLayer(feature, options) {
+    var defaultStyle = {
+        fillOpacity: 0,
+        color: 'black'
+    };
+
+    // Merge the provided options with the default style
+    var style = Object.assign({}, defaultStyle, options.style);
+
+    var intersectingFeatures = intersectingFeaturesObject[feature.properties.fid];
+    var intersectingGeoJSON = {
+        "type": "FeatureCollection",
+        "name": "IntersectingFeatures",
+        "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+        "features": intersectingFeatures || [] // Use intersectingFeatures if available, otherwise empty array
+    };
+    
+    return L.geoJSON(intersectingGeoJSON, {
+        onEachFeature: function(feature, layer) {
+            layer.bindPopup("<b>Name: </b>" + feature.properties.name, {className: 'custom-popup'});
+            layer.on('popupopen', function(event) {
+                var popupContent = event.popup._contentNode;
+                popupContent.innerHTML += "<br> <a href='#' class='read-more'> <br>  Read More </a>" + "<div class='hidden-content-h3'> <b>Info: </b>" + feature.properties.info + "</div>" + "<a href='#' class='collapse'> <br> Collapse Content </a>";
+                // Now that the content is added, add event listeners after a delay
+                setTimeout(function() {
+                    document.querySelector('.read-more').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        popup = map._popup;
+                        console.log('wagwan');
+                        var popupContent = event.popup._contentNode;
+                            setTimeout(function() {
+                            var popupContentWrapper = document.querySelector('.leaflet-popup-content-wrapper');
+                            if (popupContentWrapper) {
+                            popupContentWrapper.style.width = 300 + 'px'; // Set the new width in pixels
+                                }
+                                setTimeout(function() {
+                                    var popupTip = document.querySelector('.leaflet-popup-tip-container');
+                                    if (popupTip) {
+                                        popupTip.classList.add('shift-left');
+                                    }
+                                }, 0); // Adjust the delay for applying margin-left
+                            }, 100)
+                        document.querySelector('.hidden-content-h3').style.display = 'block';
+                        document.querySelector('.collapse').style.display = 'block';
+                            document.querySelector('.collapse').addEventListener('click', function(e) {
+                            e.preventDefault(); 
+                                document.querySelector('.hidden-content-h3').style.display = 'none';
+                                document.querySelector('.collapse').style.display = 'none';
+                                document.querySelector('.read-more').style.display = 'block';
+                                setTimeout(function() {
+                                    var popupContentWrapper = document.querySelector('.leaflet-popup-content-wrapper');
+                                    if (popupContentWrapper) {
+                                    popupContentWrapper.style.width = 190 + 'px'; // Set the new width in pixels
+                                        }
+                            }, 100)
+                            });
+                        document.querySelector('.read-more').style.display = 'none';
+                            });
+                }, 200); // 100 milliseconds delay
+            });
+                layer.on('popupclose', function(event) {
+                var popupContentWrapper = document.querySelector('.leaflet-popup-content-wrapper');
+                if (popupContentWrapper) {
+                    popupContentWrapper.style.width = '190px'; // Set the width when popup closes
+                }
+            });
+            },
+        style: style
+    });
+}
+
+
+
+    zoomControl.addTo(map);
+
+    map.addLayer(ggl);
+    map.createPane('pane_GoogleLabels_2');
+        map.getPane('pane_GoogleLabels_2').style.zIndex = 402;
+        var layer_GoogleLabels_2 = L.tileLayer('https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleLabels_2',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleLabels_2;
+        map.addLayer(layer_GoogleLabels_2);
+
+        document.addEventListener('DOMContentLoaded', function() {
+    // Function to count the occurrences of the specified text in the document
+    function countOccurrencesOfText(text) {
+        // Get the entire HTML content of the document
+        var htmlContent = document.documentElement.innerHTML;
+
+        // Use a regular expression to find all occurrences of the text
+        var regex = new RegExp(text, 'g');
+        var occurrences = htmlContent.match(regex);
+
+        // Return the count of occurrences
+        return occurrences ? occurrences.length : 0;
+    }
+
+    // Function to toggle the visibility of the map pane
+    function toggleMapPaneVisibility() {
+        var mapPane = document.querySelector('.leaflet-pane.leaflet-map-pane');
+        var legend = document.querySelector('#legend');
+        var zoom = document.querySelector('.leaflet-control-zoom');
+        var scale = document.querySelector('.leaflet-control-scale');
+        var isMobile = window.innerWidth <= 600;
+        if (mapPane) {
+            // Hide the map pane if the count is greater than or equal to 2
+            if (countOccurrencesOfText('google-streetview-enabled') >= 2) {
+                mapPane.style.visibility = 'hidden';
+                legend.style.visibility = 'hidden';
+                zoom.style.visibility = 'hidden';
+                scale.style.visibility = 'hidden';}
+            else if (isMobile) {
+                mapPane.style.visibility = 'visible';
+                legend.style.visibility = 'hidden';
+                zoom.style.visibility = 'visible';
+                scale.style.visibility = 'hidden';
+            }
+             else {
+                mapPane.style.visibility = 'visible';
+                legend.style.visibility = 'visible';
+                zoom.style.visibility = 'visible';
+                scale.style.visibility = 'visible';
+            }
+        }
+    }
+
+    // Call the toggleMapPaneVisibility function initially
+    toggleMapPaneVisibility();
+
+    // Create a MutationObserver instance to monitor changes to the document
+    var observer = new MutationObserver(function(mutationsList, observer) {
+        // Call the toggleMapPaneVisibility function whenever a mutation occurs
+        toggleMapPaneVisibility();
+    });
+
+    // Start observing changes to the entire document's subtree
+    observer.observe(document.documentElement, { subtree: true, childList: true });
+});
+
+function openStreetView(lat, lng) {
+    var iframe = document.createElement('iframe');
+    iframe.width = '100%';
+    iframe.height = '100%';
+    iframe.frameborder = '0';
+    iframe.style.border = '0';
+    iframe.referrerpolicy = 'no-referrer-when-downgrade';
+    iframe.src = `https://www.google.com/maps/embed/v1/streetview?key=AIzaSyAq5qcljI_FErq4L6lbMH1LklS-pVWBglw&location=${lat},${lng}&heading=0&pitch=0&fov=60`;
+    iframe.allowfullscreen = true;
+    iframe.style.position = 'fixed'; // Position iframe fixedly
+    iframe.style.top = '0'; // Align iframe to top of viewport
+    iframe.style.left = '0'; // Align iframe to left of viewport
+    iframe.style.zIndex = '1000'; // Set z-index to 1000
+
+    document.body.appendChild(iframe); // Append iframe to the body
+
+    var backButton = document.createElement('button');
+    backButton.innerText = 'Back to Map';
+    backButton.style.position = 'absolute';
+    backButton.style.top = '80px';
+    backButton.style.left = '10px';
+    backButton.style.backgroundColor = 'black';
+    backButton.style.color = 'white'; // Set text color to white
+    backButton.style.zIndex = '1000'; // Make sure the button appears on top of the iframe
+    backButton.onmousedown = function () {
+        backButton.style.backgroundColor = 'darkgrey';
+    }
+    backButton.onclick = function() {
+        // Remove the iframe and button from the DOM
+        iframe.parentNode.removeChild(iframe);
+        backButton.parentNode.removeChild(backButton);
+        backButton.style.backgroundColor = 'darkgrey'
+    };
+    backButton.onmouseup = function() {
+    backButton.style.backgroundColor = 'black';
+    };
+    backButton.onmouseleave = function() {
+    backButton.style.backgroundColor = 'black';
+    };
+
+    var ButtonContainer = document.createElement('div');
+    ButtonContainer.appendChild(backButton);
+
+    document.body.appendChild(ButtonContainer); // Append the button container to the body
+}
+
+
+
+/*========================================================= 
+
+        Next to do:
+
+        1. Fix popups ✓
+        2. Add streetview from marker ✓
+        3. Add info
+            a. Add South Island Info.
+            b. Add Plonk Info. 
+            c. Add additional plonks for H3.
+        4. Website
+            a. Format map & article.
+            b. Write article.
+            c. Post to website & AWS.
+
+
+============================================================*/
+
+</script>
+</html>
