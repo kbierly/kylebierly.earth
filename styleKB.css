@@ -20,6 +20,9 @@ nav ul li a.active{
 h1{
     font-family: "EB Garamond", sans-serif; 
 }
+h3{
+  font-family: "Lato", sans-serif; 
+}
 a{color: black;}
 p{
     text-indent: 50px;
@@ -204,7 +207,7 @@ font-size: 40pt;}
   }
   /* Adjust other styles as needed */
   .portfolio-box{
-    margin-top: 6vh;
+    margin-top: 0vh;
     margin-left: auto;
     margin-right: auto;
     background-color: none;
@@ -253,7 +256,7 @@ font-size: 40pt;}
     left: 50%; /* Position the left edge at the horizontal center */
     transform: translateX(-50%);
     padding-left: 3px;
-    margin-top: 100px;
+    margin-top: -30px;
     position: fixed;
     display: block;
     font-family: "Lato", sans-serif;
@@ -363,7 +366,7 @@ button{
   outline: none;
   margin-bottom: 15px;
 }
-.SchoolBusMapContainer {
+.GeoGuessrMapContainer {
   height: 83vh; /* Adjust this value as needed */
   width: 90%;
   margin-left: auto;
@@ -371,8 +374,23 @@ button{
   overflow: hidden;
   position: relative; /* Necessary for absolutely positioning the map */
 }
-#FirstP{
-  margin-top: -50px;
+#legend{
+  visibility: hidden !important;
+}
+#GeoGuessrMap {
+  width: 100%;
+  max-width: 545px;
+  height: 100%;
+  position: relative;
+  top: -8px; /* Adjust as needed */
+}
+.SchoolBusMapContainer {
+  height: 83vh; /* Adjust this value as needed */
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  position: relative; /* Necessary for absolutely positioning the map */
 }
 #SchoolBusMap {
   width: 100%;
@@ -382,12 +400,12 @@ button{
   top: -8px; /* Adjust as needed */
 }
 .article{
-  background-color: rgba(239, 235, 227, 0.8);
+  background-color: rgba(239, 235, 227, 0.9);
   padding-top: 5px;
   padding-bottom: 20px;
   width: 90%;
   max-width: 1000px;
-  margin-top: 50px;
+  margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
@@ -429,6 +447,9 @@ margin-bottom: 29px;
   hyphens: auto;
 }
 #SchoolBusMain{
+  padding-bottom: 30px;
+}
+#GeoGuessrMain{
   padding-bottom: 30px;
 }
 #SchoolBusBody{
@@ -583,7 +604,7 @@ margin-bottom: 29px;
   }
   /* Adjust other styles as needed */
   .portfolio-box{
-    margin-top: 4vh;
+    margin-top: 1vh;
     margin-left: auto;
     margin-right: auto;
     background-color: none;
@@ -591,6 +612,9 @@ margin-bottom: 29px;
     min-width: 600px;
     max-width: 1000px;
     padding-top: 20px;
+  }
+  #DummyItems{
+
   }
   .portfolio-row{
     display: flex;
@@ -633,7 +657,7 @@ margin-bottom: 29px;
     left: 50%; /* Position the left edge at the horizontal center */
     transform: translateX(-50%);
     position: relative;
-    margin-top: 100px;
+    margin-top: -30px;
     padding-left: 3px;
     font-family: "Lato", sans-serif;
     font-size: 30px;
@@ -761,6 +785,18 @@ button{
   overflow: hidden;
   position: relative; /* Necessary for absolutely positioning the map */
 }
+.GeoGuessrMapContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  width: 85%;
+  min-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  position: relative; /* Necessary for absolutely positioning the map */
+}
 
 #SchoolBusMap {
   width: 74%;
@@ -771,8 +807,18 @@ button{
   position: relative;
   top: -6.5px; /* Adjust as needed */
 }
+#GeoGuessrMap {
+  width: 100%;
+  min-width: 545px;
+  height: 100%;
+  position: relative;
+}
+#LargeMapArticle{
+  width: 90%;
+  max-width: 2000px;
+}
 .article{
-  background-color: rgba(239, 235, 227, 0.8);
+  background-color: rgba(239, 235, 227, 0.9);
   padding-top: 5px;
   padding-bottom: 30px;
   width: 65%;
@@ -805,6 +851,9 @@ font-size: 40px;
 font-weight: 600;
 margin-bottom: 3%;
 }
+#GeoGuessrTitle{
+  margin-bottom: 2.25%;
+  }
 .ArticleText{
   width: 75%;
   margin-left: auto;
@@ -823,6 +872,9 @@ margin-bottom: 3%;
   padding-bottom: 50px;
 }
 #SchoolBusMain{
+  padding-bottom: 50px;
+}
+#GeoGuessrMain{
   padding-bottom: 50px;
 }
 .pdf {
@@ -898,7 +950,6 @@ margin-bottom: 3%;
 }
 @media (min-width: 1600px) {
   #FirstP{
-    margin-top: -55px;
   }
   .SchoolBusMapContainer{
     margin-top: -75px;
