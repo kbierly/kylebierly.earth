@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html id="SchoolBusHTML" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> GeoGuessr Proof of Concept | Kyle Bierly </title>
+        <link rel="icon" type="image/x-icon" href="../../Images/earth.png">
+        <meta name="description" content="New Zealand GeoGuessr Guide/Proof of Concept.">
+        <meta name="keywords" content="GIS Analyst, Kyle Bierly, GIS, Portfolio, Technician, Network Analysis, Analysis, Bus">
+        <meta name="author" content="Kyle Bierly">
+        <link rel="stylesheet" href="../../styleKB.css">
+        <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <script src="https://getinsights.io/js/insights.js"></script>
+    <script>
+    insights.init('U7lzqs94mv3V6DvJ');
+    insights.trackPages();
+    </script>
+    </head>
+<body id="SchoolBusBody">
+        <nav class="navbar">
+            <a id="KyleBierly" href="../../"><img id="blackglobe" src="../../Images/earth.png" alt="globe"><h1>Kyle Bierly</h1></a>
+            <ul>
+                <li><a href="../../About/">About</a></li>
+                <li><a href="../../Portfolio/" class="active">Portfolio</a></li>
+                <li><a href="../../Contact/">Contact</a></li>
+            </ul>
+        </nav>
+    <main id="GeoGuessrMain">
+        <div class="article" id="LargeMapArticle">
+            <h1 class="ArticleTitle" id="GeoGuessrTitle">New Zealand GeoGuessr Guide</h1>
+        <div class="GeoGuessrMapContainer">
+            <iframe src="../../Tutorials/geoguessrTest1.html" alt="Web map showing GeoGuessr guide of NZ" id="GeoGuessrMap">
+            </iframe>
+        </div>
+        <div class="ArticleText">
+            <br>
+            <h3>Instructions:</h3>
+                <p id="FirstP">The map should be relatively straightforward to play around with. Click on New Zealand for more information about the country. You can click the "Read More" anchor for additional information/GeoGuessr clues about the country. The country is split into two <a href="https://h3geo.org" target="_blank">H3</a> regions (North and South). Check the "New Zealand H3" box in the New Zealand popup to make them appear. Each H3 region contains additional clues specific to that region. Lastly, check the "New Zealand Plonks" box to view hand-picked examples for each of these clues. Upon clicking a marker, a popup will open that explains which GeoGuessr clue(s) the marker is relevant to, and it will provide a "Go to Street View" link so that you can see what these clues look like in-game.
+                </p>
+                <p>You can also drag and drop the little pegman to explore anywhere there is Google Street View coverage in the world. The map has been colored to demonstrate which countries/territories are included and excluded from GeoGuessr. This map works much better on desktop.
+                </p>
+            <h3>Overview:</h3>
+            <p id="FirstP">This map serves as an intuitive guide to better learn the country of New Zealand in the game GeoGuessr. From Wikipedia: "GeoGuessr is a browser-based geography game in which players are tasked to guess locations from Google Street View imagery." The closer the player guesses to the actual location, the higher their score becomes.
+            </p>
+            <p>This guide builds off of <a href="www.plonkit.net/new-zealand" target=”_blank”>Plonk It</a>, a guide created to help GeoGuessr players guess countries and territories that have official Google Street View Coverage. The Plonk It guide is extensive, and it can help players even narrow down their guesses to specific regions based on obvious clues like street signs and landscapes but also more niche (or "meta") clues&#8212;like if Street View imagery is copyrighted from a certain year. The Plonk It guide does not have an interactive map that demonstrates examples of all its clues, so I sought to create a map that someone could directly interface with and learn the GeoGuessr clues for New Zealand via hand-picked, relevant examples. This learning method is more effective than attempting to memorize a written guide and then trying to recognize certain clues during a game. Indeed, GeoGuessr is a geographic game, so a more geographic-centered guide should be more conducive to learning.
+            </p>
+            <p>For my guide, I chose to focus on New Zealand as a proof of concept. Due to the sheer amount of information available, it would take significantly longer to create a guide for the entire world by myself. There are a few reasons why I chose to focus on New Zealand. New Zealand is a country, but it is also easy to split into two separate H3 regions (North and South) with the H3 Toolkit presets. In comparison, a country like Australia would take significantly longer to write region-specific clues because it is larger and would have more regions. I wanted to make this project completely scalable, so that the infrastructure for the code would be established, and all that is required going forward for adding other countries is entering information/clues, and I was able to accomplish this. The clues I include in my map are not comprehensive by any means. It is possible to provide clues for even more precise regions, but, again, I wanted to create this map as a proof of concept/general guide that should at least allow a player to recognize New Zealand 90% of the time and potentially even region guess between the North and South Islands. If you're interested in this map and would like me to expand it to include other countries, let me know!
+            </p>
+            <h3>Why This Map is Important for Those Interested in GIS:</h3>
+            <p id="FirstP">I was able to accomplish a few interesting things that may be useful for other GIS projects. I coded this project almost entirely within JavaScript, and I relied heavily on the leaflet.js and leaflet-google.js packages. These packages allowed me to create an interactive web application that integrates Google Maps API into an open-source framework. With leaflet-google.js, I could use Google Maps as a base layer, and I could integrate the drag-and-drop "pegman" tool. I also figured out how to integrate Google Street View into predefined point data by creating a function that constructs a Street View iframe for a given latitude and longitude. 
+            <p>This implementation of Google Maps API (specifically Street View) could potentially be a big deal because it allows those who work with GIS to include Street View information in their projects for free. For example, if a civil engineering firm wanted to include Street View information into one of their web maps for a highway project they are working on, they could implement the pegman tool as I have done. But they could also select specific, important points and embed Street View imagery at that latitude and longitude with iframes as I have done. </p>
+            </p>
+            <h3>Methodology:</h3>
+                <p id="FirstP"> Whenever I code something or work on a big project, I find it helpful to create a general outline for how I should attack the problem. This outline is a continual work in progress, as new bugs or issues inevitably arise, but the outline allows me to stay organized and think logically before diving into a project. The outline I started with began as follows: </p>
+                    <ol class="ArticleList">
+                    <li> Input GeoJSON for countries/territories outline. </li>
+                    <li> Color features based on in game or not. </li>
+                    <li> Input GeoJSON for H3 & stylize H3. </li>
+                    <li> Add click event such that H3 intersecting with country/territory appear. </li>
+                    <li> Add click event such that markers within country/territory appears. </li>
+                    <li> Add popup for country based on plonk it information (generic, not too specific). </li>
+                    <li> Add popup for H3 region based on plonk it information (generic, not too specific). </li>
+                    <li> Add popup for marker, say why it's included, and integrate Street View with Google Maps API. </li>
+                    </ol>
+                <p>Then I specified this outline to New Zealand. For those interested, I will now break down every step of the process that I took as well as any problems I encountered along the way. To begin with, I had to organize the geospatial data. I did this by finding a geospatial dataset through the UN called, "<a href="https://public.opendatasoft.com/explore/dataset/world-administrative-boundaries/export/?flg=en-us" target="_blank">World Administrative Boundaries - Countries and Territories</a>," which provided a polygon layer and additional information on all of the countries and territories of the world. I cleaned this data; e.g., some of this data was outdated, like Eswatini was named Swaziland. QGIS I found works better for handling APIs (like H3 and Google), so most of my GIS software needs were conducted within QGIS. I added a "GeoGuessr" field to the World Boundaries dataset, and I gave countries/territories that are in GeoGuessr a value of "1" and countries that are not a value of "0." 
+                    </p>
+                <p>Next, I wanted to give GeoGuessr players a guide to "region guessing" countries, because it is one thing to be able to recognize Russia, it is another thing entirely to recognize Omsk, Russia. For this purpose, I decided to split large countries into H3 tiles with the "H3 Toolkit" plugin. <a href="https://h3geo.org" target="_blank">According to the website for H3</a>, "H3 is a geospatial indexing system that partitions the world into hexagonal cells." H3 was originally developed by Uber as a tiling system for their geospatial data science needs; there are a number of reasons why hexagons can be a preferential geospatial tiling shape, but it is not necessary to discuss them here. The H3 tiles were uniformly projected onto the map with the H3 Toolkit plugin, however, which makes no sense given that I was working within the WGS 84 Pseudo-Mercator projection, so tiles should become larger as they approach the poles. I worked around this issue by adjusting the H3 Tiles' PCS to an <a target="_blank" href="https://en.wikipedia.org/wiki/Equal-area_projection">equal-area projection</a>. Lastly, I found specific points with the "Google Street View Layer" QGIS plugin that were relevant to the clues I was describing, and I input these points as my "New Zealand Plonks" layer.
+            </p>
+            <p>Once this data was organized, it was a matter of building it into a web application via JavaScript. I had two goals in mind when constructing this web app: I wanted it to be user-friendly and scalable.</p>
+            <p>By scalable, I mean that I wanted to make this tool not only relevant to New Zealand but all countries within GeoGuessr. I implemented a few features to do so. The popup I created for New Zealand can be easily reused for other countries. I did this by using variables like "feature.properties.name" (e.g. New Zealand) that the popup is dependent on. I also wrote my code so that when the H3 checkbox is selected, all the H3 regions that intersect with the selected country become visible. I accomplished this via Turf.js, an advanced geospatial analysis tool for JavaScript; it allowed me to perform boolean queries about geospatial intersections. You might wonder, "Why is this important?" It is essential because it saves a massive amount of busy work from having to store additional information about whether an H3 region intersects with a given country. For example, do I want to go through every H3 region and add additional information about whether it intersects with Australia, Indonesia, or both? Or do I want to just have the tool that I built with Turf.js tell me whether a region intersects with that country, and then I can make it visible? The answer should hopefully be obvious with how much time the latter case would save. The "Plonks" points layer is also easily scalable to other countries.
+            </p>
+            <p>For the user-friendly aspect of this map, I tried to imagine how I wanted a user to interact with the map before I started working on it. I decided I did not want a typical Leaflet layer controls panel/legend. Rather, I envisioned a user clicking on a country (New Zealand) and being able to directly toggle the H3 and Plonks layers within the popup for the country. This objective created a significant challenge within JavaScript in managing multilevel popups.
+            </p>
+            <p>
+                One of the more annoying aspects of Leaflet popups is that they often fail to expand when pictures are included in the popup content. This issue has been documented <a href="https://stackoverflow.com/questions/38170366/leaflet-adjust-popup-to-picture-size" target="_blank">here</a> on Stack Overflow. I worked around this issue by including a function to expand the popup width based on the size of the image, but this is only half of the solution. The problem that arises when expanding the width is that the popup tip gets shifted over from where the user originally clicked on the map. This problem only occurs the first time the popup is opened, since once the popup width and image are cached correctly in browser, the tip appears in the correct place each time the user clicks on the map thenceforth. To fix this issue, one of the commenters in the Stack Overflow post I linked suggested using the Leaflet update() method after listening for the popup event and the image. However, the popup only included the image and not the rest of the text with the update() method. To work around this bug, I did not use update(); instead, I set a timeout for the popup to close once fully loaded, then I forced it to reopen, and I planted a flag once this was achieved so that the popup would only refresh the first time New Zealand is clicked. Through this effort, I was able to achieve a few things: the popup width expanded like I wanted, the popup tip was in the correct location, and all of my popup information was correctly included. I ran into similar issues with the "Read More" and "Collapse Content" sections of my popups, but I was proud to have fixed those bugs, as I believe they made the popups less cluttered and more user-friendly.
+            </p>
+            <p>The last issues I ran into that I will discuss are specifically about Google Street View API. First, the pegman&#8212;the pegman seemed like a great way to implement another user-friendly and interactive feature so that someone can explore areas other than the ones I hand-picked, but my GeoGuessr countries layer kept covering the pegman, so this tool was inaccessible. The problem was that the pegman was included in the Google layer, which was my basemap. I worked around this by adjusting the CSS so that the actual map portion's z-index was forced to be "initial," and I set the z-index of the pegman to a very high number.</p>
+             <p>
+                I also ran into the conundrum of how I could create an HTML anchor within the plonks popups that would take the user to the Street View for that specific point. At first, I thought I could create a JavaScript function that could simulate the drag and drop of the pegman at that point. This idea turned out to be quite difficult and a waste of time, once I realized that Google allows API keyholders to embed Google Street View via iframes for free. So, I instead created a JavaScript function using these iframes and the latitude and longitude of the markers. Then, it was a matter of simply layering this iframe over my map and adding a basic "Back to Map" button on top of the iframe. 
+            </p>
+        </div>
+    </div>
+    </main>
+</body>
+</html>
