@@ -231,8 +231,8 @@ font-size: 40pt;}
   .portfolio-group{
     text-align: center;
     width: 120px;
-    padding-top: 30px;
-    padding-bottom: 5px;
+    padding-top: 24px;
+    padding-bottom: 0px;
   }
   .portfolio-group:hover{
     background-color: rgb(239, 235, 227, .5);
@@ -256,7 +256,7 @@ font-size: 40pt;}
     left: 50%; /* Position the left edge at the horizontal center */
     transform: translateX(-50%);
     padding-left: 3px;
-    margin-top: -30px;
+    margin-top: -40px;
     position: fixed;
     display: block;
     font-family: "Lato", sans-serif;
