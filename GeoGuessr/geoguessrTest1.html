@@ -88,7 +88,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
     <script src="https://raruto.github.io/cdn/leaflet-google/0.0.3/leaflet-google.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key="></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq5qcljI_FErq4L6lbMH1LklS-pVWBglw"></script>
     <script src="PlonksTest.js"></script>
     <script src="H3Test.js"></script>
     <script src="NZTest.js"></script>
@@ -516,18 +516,28 @@ function generateIntersectingLayer(feature, options) {
                 mapPane.style.visibility = 'hidden';
                 legend.style.visibility = 'hidden';
                 zoom.style.visibility = 'hidden';
-                scale.style.visibility = 'hidden';}
+                scale.style.visibility = 'hidden';
+                if (map && map.dragging) {
+                        map.dragging.disable();
+                    }
+                }
             else if (isMobile) {
                 mapPane.style.visibility = 'visible';
                 legend.style.visibility = 'hidden';
                 zoom.style.visibility = 'visible';
                 scale.style.visibility = 'hidden';
+                if (map && map.dragging) {
+                        map.dragging.enable();
+                    }
             }
              else {
                 mapPane.style.visibility = 'visible';
                 legend.style.visibility = 'visible';
                 zoom.style.visibility = 'visible';
                 scale.style.visibility = 'visible';
+                if (map && map.dragging) {
+                        map.dragging.enable();
+                    }
             }
         }
     }
@@ -591,7 +601,40 @@ function openStreetView(lat, lng) {
     document.body.appendChild(ButtonContainer); // Append the button container to the body
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to count the occurrences of the specified text in the document
 
+    // Function to toggle the visibility of the map pane
+    function toggleMapDrag() {
+        var mapPane = document.querySelector('.leaflet-pane.leaflet-map-pane');
+        var isMobile = window.innerWidth <= 600;
+        var gmSvpc = document.querySelector('.gm-svpc');
+            if (gmSvpc) {
+                gmSvpc.addEventListener('touchstart', function() {
+                    if (map && map.dragging) {
+                        map.dragging.disable();
+                    }
+                });
+                gmSvpc.addEventListener('touchend', function() {
+                    if (map && map.dragging) {
+                        map.dragging.enable();
+                    }
+                });
+            }
+    }
+
+    // Call the toggleMapPaneVisibility function initially
+    toggleMapDrag();
+
+    // Create a MutationObserver instance to monitor changes to the document
+    var observer = new MutationObserver(function(mutationsList, observer) {
+        // Call the toggleMapPaneVisibility function whenever a mutation occurs
+        toggleMapDrag();
+    });
+
+    // Start observing changes to the entire document's subtree
+    observer.observe(document.documentElement, { subtree: true, childList: true });
+});
 
 /*========================================================= 
 
